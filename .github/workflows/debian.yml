@@ -1,0 +1,23 @@
+name: Test Debian package
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - bee
+      - debian/**
+      - .github/workflows/debian.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - run: sudo apt-get update
+      - run: sudo apt-get install --yes build-essential debhelper devscripts lintian
+      - name: Build binary package
+        run: dpkg-buildpackage --build=binary --no-sign
+      - name: Inspect package
+        run: |
+          dpkg-deb --info ../bee-holy-scripture_1.0.0-1_all.deb
+          lintian ../bee-holy-scripture_1.0.0-1_all.deb

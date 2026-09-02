@@ -52,6 +52,14 @@ sudo dnf copr enable redpanas/bee
 sudo dnf install bee-holy-scripture
 ```
 
+### Ubuntu PPA
+
+```sh
+sudo add-apt-repository ppa:redpanas/bee
+sudo apt update
+sudo apt install bee-holy-scripture
+```
+
 ### npm
 
 ```sh
