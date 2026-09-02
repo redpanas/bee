@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 
 Package: bee-holy-scripture
 Architecture: all
-Depends: curl, sed, ${misc:Depends}
+Depends: curl, ${misc:Depends}
 Description: holy scripture retrieval tool
  Downloads a pinned plain-text copy of the Bee Movie dialogue transcript,
  converts employment-related words into stylized text, and writes the result
