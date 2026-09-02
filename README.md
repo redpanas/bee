@@ -1,5 +1,7 @@
 # bee
 
+[![Test packages](https://github.com/redpanas/bee/actions/workflows/test.yml/badge.svg)](https://github.com/redpanas/bee/actions/workflows/test.yml)
+
 The holy scripture downloader.
 
 `bee` downloads a pinned plain-text copy of the Bee Movie dialogue transcript,
@@ -29,30 +31,44 @@ different destination, pass it as the first argument:
 ./bee output.txt
 ```
 
-## Install
+Options:
 
-```sh
-install -m 755 bee /usr/local/bin/bee
+```text
+bee [OUTPUT_FILE]
+bee --help
+bee --version
 ```
 
-## Packages
+## Installation
 
-Release builds provide packages for Debian/Ubuntu (`.deb`), Fedora/RHEL/openSUSE
-(`.rpm`), and Alpine (`.apk`), plus a portable archive. Packaging definitions
-for Arch/AUR, Homebrew on Linux, Nix, and Snap are in [`packaging`](packaging).
+Every distribution installs the command as `bee`. The package is named `bee`
+where that name is available; registries where another project already owns
+the name use `bee-holy-scripture`.
 
-The package is named `bee` where that name is available. Registries where it is
-already owned by another project use `bee-holy-scripture`. Every package installs
-the command as `bee`.
-
-### Fedora COPR
+### Standalone script
 
 ```sh
-sudo dnf copr enable redpanas/bee
-sudo dnf install bee-holy-scripture
+git clone https://github.com/redpanas/bee.git
+cd bee
+sudo install -m 755 bee /usr/local/bin/bee
+```
+
+### Linux release packages
+
+The [v1.0.0 GitHub release](https://github.com/redpanas/bee/releases/tag/v1.0.0)
+provides `.deb`, `.rpm`, `.apk`, and portable `.tar.gz` files.
+
+### Homebrew
+
+```sh
+brew install redpanas/tap/bee-holy-scripture
 ```
 
 ### Ubuntu PPA
+
+The initial package for Ubuntu 24.04 LTS is currently in the
+[Launchpad build queue](https://launchpad.net/~redpanas/+archive/ubuntu/bee/+build/33563177).
+Once published, install it with:
 
 ```sh
 sudo add-apt-repository ppa:redpanas/bee
@@ -60,10 +76,21 @@ sudo apt update
 sudo apt install bee-holy-scripture
 ```
 
+### Snap
+
+The Snap Store package is published. Its short `bee` alias is awaiting store
+approval, so use the fully qualified command until that approval is granted:
+
+```sh
+sudo snap install bee-holy-scripture
+snap run bee-holy-scripture.bee
+```
+
 ### npm
 
 ```sh
 npm install --global bee-holy-scripture
+bee --version
 ```
 
 ### PyPI
@@ -90,14 +117,14 @@ bee --version
 ### Nix
 
 ```sh
-nix profile install github:redpanas/bee
-```
-
-On installations where flakes are not enabled globally:
-
-```sh
 nix --extra-experimental-features "nix-command flakes" \
   profile install github:redpanas/bee
+```
+
+If `nix-command` and flakes are enabled globally, the shorter form works:
+
+```sh
+nix profile install github:redpanas/bee
 ```
 
 ## License

@@ -5,6 +5,7 @@ summary: The holy scripture downloader
 description: |
   Downloads a pinned plain-text copy of the Bee Movie dialogue transcript,
   converts work-related words to leetspeak, and writes it to a file.
+license: MIT
 grade: stable
 confinement: strict
 
