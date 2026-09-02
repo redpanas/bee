@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "fileutils"
+require "net/http"
+require "tempfile"
+require "uri"
+
+VERSION = "1.0.0"
+SOURCE_URL = "https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script"
+REPLACEMENTS = {
+  "employees" => "3mp10y33s", "employment" => "3mp10ym3n7",
+  "professional" => "pr0f3$$!0n@1", "profession" => "pr0f3$$!0n",
+  "employers" => "3mp10y3rs", "employer" => "3mp10y3r",
+  "employee" => "3mp10y33", "employed" => "3mp10y3d",
+  "workers" => "w0rk3rs", "working" => "w0rk!n9", "worked" => "w0rk3d",
+  "worker" => "w0rk3r", "careers" => "c@r33rs", "business" => "8u$!n3$$",
+  "manager" => "m@n@g3r", "salary" => "$@1@ry", "career" => "c@r33r",
+  "office" => "0ff!(3", "wages" => "w@g3s", "staff" => "$7@ff",
+  "hired" => "#!r3d", "fired" => "f!r3d", "works" => "w0rks",
+  "wage" => "w@g3", "hire" => "#!r3", "jobs" => "j08s", "work" => "w0rk",
+  "boss" => "80$$", "job" => "j08"
+}.freeze
+
+def usage(io = $stdout)
+  io.puts "Usage: bee [OUTPUT_FILE]\n\nDownload and publish the holy scripture."
+end
+
+case ARGV.first
+when "-h", "--help"
+  usage
+  exit
+when "-v", "--version"
+  puts "bee #{VERSION}"
+  exit
+end
+
+if ARGV.first&.start_with?("-")
+  warn "bee: unknown option: #{ARGV.first}"
+  exit 2
+end
+if ARGV.length > 1
+  usage($stderr)
+  exit 2
+end
+
+begin
+  output = File.expand_path(ARGV.first || "the_holy_scripture.txt")
+  text = Net::HTTP.get(URI(SOURCE_URL))
+  REPLACEMENTS.each do |word, replacement|
+    text.gsub!(/\b#{Regexp.escape(word)}\b/i, replacement)
+  end
+
+  temporary = Tempfile.new([".bee", ".tmp"], File.dirname(output), encoding: "UTF-8")
+  begin
+    temporary.write(text)
+    temporary.close
+    FileUtils.mv(temporary.path, output)
+  ensure
+    temporary.close!
+  end
+
+  puts "Published the holy scripture to #{ARGV.first || 'the_holy_scripture.txt'}"
+rescue StandardError => e
+  warn "bee: #{e.message}"
+  exit 1
+end

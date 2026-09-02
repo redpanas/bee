@@ -58,6 +58,13 @@ pipx install bee-holy-scripture
 bee --version
 ```
 
+### RubyGems
+
+```sh
+gem install bee-holy-scripture
+bee --version
+```
+
 ### Nix
 
 ```sh

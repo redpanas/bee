@@ -2,3 +2,4 @@ the_holy_scripture.txt
 *.egg-info/
 build/
 dist/
+*.gem
