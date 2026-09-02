@@ -40,6 +40,12 @@ The package is named `bee` where that name is available. Registries where it is
 already owned by another project use `bee-holy-scripture`. Every package installs
 the command as `bee`.
 
+### npm
+
+```sh
+npm install --global bee-holy-scripture
+```
+
 ## License
 
 The source code in this repository is available under the [MIT License](LICENSE).

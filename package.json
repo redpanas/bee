@@ -1,0 +1,34 @@
+{
+  "name": "bee-holy-scripture",
+  "version": "1.0.0",
+  "description": "The holy scripture downloader",
+  "license": "MIT",
+  "author": "Panagiotis Kouzaris",
+  "homepage": "https://github.com/redpanas/bee#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redpanas/bee.git"
+  },
+  "bugs": {
+    "url": "https://github.com/redpanas/bee/issues"
+  },
+  "keywords": [
+    "bee",
+    "cli",
+    "shell"
+  ],
+  "bin": {
+    "bee": "bee"
+  },
+  "files": [
+    "bee",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "make test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
