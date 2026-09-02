@@ -7,9 +7,14 @@ converts work-related words to leetspeak, and writes the result to a file.
 
 ## Requirements
 
+The standalone script and native Linux packages require:
+
 - A POSIX-compatible shell
 - `curl`
 - GNU `sed`
+
+The PyPI package uses Python 3.9 or newer and works natively on Linux, macOS,
+and Windows.
 
 ## Usage
 
@@ -50,6 +55,7 @@ npm install --global bee-holy-scripture
 
 ```sh
 pipx install bee-holy-scripture
+bee --version
 ```
 
 ### Nix

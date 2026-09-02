@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "bee-holy-scripture"
-version = "1.0.0"
+version = "1.0.1"
 description = "The holy scripture downloader"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -16,16 +16,20 @@ keywords = ["bee", "cli", "shell"]
 classifiers = [
   "Development Status :: 4 - Beta",
   "Environment :: Console",
+  "Operating System :: Microsoft :: Windows",
   "Operating System :: POSIX",
+  "Programming Language :: Python :: 3",
   "Programming Language :: Unix Shell",
   "Topic :: Utilities"
 ]
+
+[project.scripts]
+bee = "bee_holy_scripture.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/redpanas/bee"
 Repository = "https://github.com/redpanas/bee"
 Issues = "https://github.com/redpanas/bee/issues"
 
-[tool.setuptools]
-packages = []
-script-files = ["bee"]
+[tool.setuptools.packages.find]
+include = ["bee_holy_scripture"]
