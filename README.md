@@ -46,6 +46,12 @@ the command as `bee`.
 npm install --global bee-holy-scripture
 ```
 
+### PyPI
+
+```sh
+pipx install bee-holy-scripture
+```
+
 ### Nix
 
 ```sh
