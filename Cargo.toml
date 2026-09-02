@@ -1,0 +1,22 @@
+[package]
+name = "bee-holy-scripture"
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.70"
+description = "The holy scripture downloader"
+license = "MIT"
+repository = "https://github.com/redpanas/bee"
+homepage = "https://github.com/redpanas/bee"
+readme = "README.md"
+keywords = ["bee", "cli", "scripture"]
+categories = ["command-line-utilities"]
+include = ["src/**", "Cargo.toml", "Cargo.lock", "README.md", "LICENSE"]
+
+[[bin]]
+name = "bee"
+path = "src/main.rs"
+
+[dependencies]
+regex = "1.11"
+tempfile = "3.20"
+ureq = { version = "2.12", default-features = false, features = ["tls"] }

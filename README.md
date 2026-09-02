@@ -65,6 +65,13 @@ gem install bee-holy-scripture
 bee --version
 ```
 
+### Cargo
+
+```sh
+cargo install bee-holy-scripture
+bee --version
+```
+
 ### Nix
 
 ```sh

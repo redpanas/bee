@@ -3,3 +3,4 @@ the_holy_scripture.txt
 build/
 dist/
 *.gem
+target/
