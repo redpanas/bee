@@ -46,6 +46,19 @@ the command as `bee`.
 npm install --global bee-holy-scripture
 ```
 
+### Nix
+
+```sh
+nix profile install github:redpanas/bee
+```
+
+On installations where flakes are not enabled globally:
+
+```sh
+nix --extra-experimental-features "nix-command flakes" \
+  profile install github:redpanas/bee
+```
+
 ## License
 
 The source code in this repository is available under the [MIT License](LICENSE).

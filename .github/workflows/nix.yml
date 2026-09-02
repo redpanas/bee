@@ -1,0 +1,21 @@
+name: Test Nix package
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - bee
+      - flake.nix
+      - flake.lock
+      - packaging/nix/**
+      - .github/workflows/nix.yml
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v31
+      - run: nix flake check
+      - run: nix build
+      - run: ./result/bin/bee --version | grep -qx 'bee 1.0.0'
