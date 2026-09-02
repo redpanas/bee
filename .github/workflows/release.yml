@@ -12,21 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: goreleaser/goreleaser-action@v6
-        with:
-          distribution: nfpm
-          version: v2.47.0
-          args: package --packager deb --target dist/
-      - uses: goreleaser/goreleaser-action@v6
-        with:
-          distribution: nfpm
-          version: v2.47.0
-          args: package --packager rpm --target dist/
-      - uses: goreleaser/goreleaser-action@v6
-        with:
-          distribution: nfpm
-          version: v2.47.0
-          args: package --packager apk --target dist/
+      - name: Install nFPM
+        run: |
+          curl -fsSLO https://github.com/goreleaser/nfpm/releases/download/v2.47.0/nfpm_2.47.0_Linux_x86_64.tar.gz
+          echo '0660ca602b2d2d2ae4781a06c692b3eeb9d437ffea05b831d76e41f4a3188783  nfpm_2.47.0_Linux_x86_64.tar.gz' | sha256sum --check
+          tar -xzf nfpm_2.47.0_Linux_x86_64.tar.gz nfpm
+      - name: Build native packages
+        run: |
+          mkdir -p dist
+          ./nfpm package --packager deb --target dist/
+          ./nfpm package --packager rpm --target dist/
+          ./nfpm package --packager apk --target dist/
       - name: Build portable archive
         run: tar -czf dist/bee-1.0.0.tar.gz bee README.md LICENSE
       - uses: softprops/action-gh-release@v2
