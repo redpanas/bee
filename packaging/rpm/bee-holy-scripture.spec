@@ -1,7 +1,7 @@
 Name:           bee-holy-scripture
 Version:        1.0.0
 Release:        1%{?dist}
-Summary:        Holy scripture downloader
+Summary:        Holy scripture retrieval tool
 
 License:        MIT
 URL:            https://github.com/redpanas/bee
@@ -13,7 +13,8 @@ Requires:       sed
 
 %description
 Downloads a pinned plain-text copy of the Bee Movie dialogue transcript,
-converts work-related words to leetspeak, and writes the result to a file.
+converts employment-related words into stylized text, and writes the result
+to a file.
 
 %prep
 %autosetup -n bee-%{version}
@@ -22,6 +23,9 @@ converts work-related words to leetspeak, and writes the result to a file.
 
 %install
 install -Dpm0755 bee %{buildroot}%{_bindir}/bee
+
+%check
+test "$(./bee --version)" = "bee %{version}"
 
 %files
 %license LICENSE
