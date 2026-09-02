@@ -45,6 +45,13 @@ The package is named `bee` where that name is available. Registries where it is
 already owned by another project use `bee-holy-scripture`. Every package installs
 the command as `bee`.
 
+### Fedora COPR
+
+```sh
+sudo dnf copr enable redpanas/bee
+sudo dnf install bee-holy-scripture
+```
+
 ### npm
 
 ```sh

@@ -1,0 +1,25 @@
+name: Test RPM package
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - bee
+      - packaging/rpm/**
+      - .github/workflows/rpm.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: fedora:43
+    steps:
+      - uses: actions/checkout@v5
+      - run: dnf -y install rpm-build rpmlint curl
+      - name: Build RPM and source RPM
+        run: |
+          mkdir -p /tmp/rpmbuild/{BUILD,BUILDROOT,RPMS,SOURCES,SPECS,SRPMS}
+          curl -fsSL https://github.com/redpanas/bee/archive/refs/tags/v1.0.0.tar.gz \
+            -o /tmp/rpmbuild/SOURCES/v1.0.0.tar.gz
+          rpmbuild -ba --define "_topdir /tmp/rpmbuild" packaging/rpm/bee-holy-scripture.spec
+      - name: Lint packages
+        run: rpmlint packaging/rpm/bee-holy-scripture.spec /tmp/rpmbuild/RPMS/noarch/*.rpm /tmp/rpmbuild/SRPMS/*.rpm
