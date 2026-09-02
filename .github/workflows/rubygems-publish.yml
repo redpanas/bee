@@ -17,4 +17,6 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ruby
-      - uses: rubygems/release-gem@v1
+      - uses: rubygems/configure-rubygems-credentials@v1
+      - run: gem build bee-holy-scripture.gemspec
+      - run: gem push bee-holy-scripture-*.gem
