@@ -6,6 +6,7 @@ stdenvNoCC.mkDerivation {
   src = ../..;
 
   nativeBuildInputs = [ makeWrapper ];
+  dontBuild = true;
 
   installPhase = ''
     runHook preInstall
