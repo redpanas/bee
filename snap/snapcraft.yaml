@@ -1,0 +1,22 @@
+name: bee-holy-scripture
+base: core24
+version: '1.0.0'
+summary: The holy scripture downloader
+description: |
+  Downloads a pinned plain-text copy of the Bee Movie dialogue transcript,
+  converts work-related words to leetspeak, and writes it to a file.
+grade: stable
+confinement: strict
+
+apps:
+  bee:
+    command: bin/bee
+    plugs: [network, home]
+
+parts:
+  bee:
+    plugin: dump
+    source: .
+    stage-packages: [curl, sed]
+    organize:
+      bee: bin/bee

@@ -1,0 +1,17 @@
+pkgname=bee-holy-scripture
+pkgver=1.0.0
+pkgrel=1
+pkgdesc='The holy scripture downloader'
+arch=('any')
+url='https://github.com/redpanas/bee'
+license=('MIT')
+depends=('curl' 'sed')
+source=("$pkgname-$pkgver.tar.gz::$url/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+  cd "bee-$pkgver"
+  install -Dm755 bee "$pkgdir/usr/bin/bee"
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

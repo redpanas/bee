@@ -1,0 +1,69 @@
+#!/bin/sh
+
+set -eu
+
+VERSION='1.0.0'
+SOURCE_URL='https://gist.githubusercontent.com/MattIPv4/045239bc27b16b2bcf7a3a9a4648c08a/raw/2411e31293a35f3e565f61e7490a806d4720ea7e/bee%2520movie%2520script'
+
+case "${1:-}" in
+  -h|--help)
+    printf 'Usage: bee [OUTPUT_FILE]\n\nDownload and publish the holy scripture.\n'
+    exit 0
+    ;;
+  -v|--version)
+    printf 'bee %s\n' "$VERSION"
+    exit 0
+    ;;
+  -*)
+    printf 'bee: unknown option: %s\n' "$1" >&2
+    exit 2
+    ;;
+esac
+
+OUTPUT_FILE="${1:-the_holy_scripture.txt}"
+OUTPUT_DIR=$(dirname "$OUTPUT_FILE")
+TEMP_FILE=$(mktemp "$OUTPUT_DIR/.bee.XXXXXX")
+trap 'rm -f "$TEMP_FILE"' EXIT HUP INT TERM
+
+SED=sed
+if command -v gsed >/dev/null 2>&1; then
+  SED=gsed
+fi
+
+curl -fsSL "$SOURCE_URL" \
+  | "$SED" \
+    -e 's/\<job\>/j08/gI' \
+    -e 's/\<jobs\>/j08s/gI' \
+    -e 's/\<work\>/w0rk/gI' \
+    -e 's/\<works\>/w0rks/gI' \
+    -e 's/\<worked\>/w0rk3d/gI' \
+    -e 's/\<working\>/w0rk!n9/gI' \
+    -e 's/\<worker\>/w0rk3r/gI' \
+    -e 's/\<workers\>/w0rk3rs/gI' \
+    -e 's/\<employment\>/3mp10ym3n7/gI' \
+    -e 's/\<employee\>/3mp10y33/gI' \
+    -e 's/\<employees\>/3mp10y33s/gI' \
+    -e 's/\<employer\>/3mp10y3r/gI' \
+    -e 's/\<employers\>/3mp10y3rs/gI' \
+    -e 's/\<employed\>/3mp10y3d/gI' \
+    -e 's/\<career\>/c@r33r/gI' \
+    -e 's/\<careers\>/c@r33rs/gI' \
+    -e 's/\<profession\>/pr0f3$$!0n/gI' \
+    -e 's/\<professional\>/pr0f3$$!0n@1/gI' \
+    -e 's/\<office\>/0ff!(3/gI' \
+    -e 's/\<business\>/8u$!n3$$/gI' \
+    -e 's/\<boss\>/80$$/gI' \
+    -e 's/\<manager\>/m@n@g3r/gI' \
+    -e 's/\<staff\>/$7@ff/gI' \
+    -e 's/\<salary\>/$@1@ry/gI' \
+    -e 's/\<wage\>/w@g3/gI' \
+    -e 's/\<wages\>/w@g3s/gI' \
+    -e 's/\<hire\>/#!r3/gI' \
+    -e 's/\<hired\>/#!r3d/gI' \
+    -e 's/\<fired\>/f!r3d/gI' \
+  > "$TEMP_FILE"
+
+mv "$TEMP_FILE" "$OUTPUT_FILE"
+trap - EXIT HUP INT TERM
+
+printf 'Published the holy scripture to %s\n' "$OUTPUT_FILE"
